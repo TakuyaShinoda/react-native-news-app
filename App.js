@@ -1,42 +1,32 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, FlatList, SafeAreaView } from 'react-native'
 
 import ListItem from './components/ListItem'
+import articles from './dummies/articles'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
 
 const App = () => {
+  const renderItem = ({ item }) => (
+    <ListItem
+      imageUrl={item.urlToImage}
+      title={item.title}
+      author={item.author}
+    />
+  )
   return (
-    <View style={styles.container}>
-      <ListItem
-        imageUrl={'https://picsum.photos/200/200'}
-        title={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.'
-        }
-        author={'React News'}
-      />
-      <ListItem
-        imageUrl={'https://picsum.photos/200/200'}
-        title={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.'
-        }
-        author={'React News'}
-      />
-      <ListItem
-        imageUrl={'https://picsum.photos/200/200'}
-        title={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.'
-        }
-        author={'React News'}
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={articles}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      ></FlatList>
+    </SafeAreaView>
   )
 }
 
