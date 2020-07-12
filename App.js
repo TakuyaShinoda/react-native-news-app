@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, SafeAreaView } from 'react-native'
-
 import ListItem from './components/ListItem'
-import articles from './dummies/articles'
+import dummyArticles from './dummies/articles'
+import Constants from 'expo-constants'
+import axios from 'axios'
+
+const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsAPIKey}`
 
 const styles = StyleSheet.create({
   container: {
@@ -12,6 +15,7 @@ const styles = StyleSheet.create({
 })
 
 const App = () => {
+  const [articles, setArticles] = useState([])
   const renderItem = ({ item }) => (
     <ListItem
       imageUrl={item.urlToImage}
@@ -19,6 +23,20 @@ const App = () => {
       author={item.author}
     />
   )
+  useEffect(() => {
+    fetchArticles()
+  }, [])
+
+  const fetchArticles = async () => {
+    try {
+      const response = await axios.get(URL)
+      setArticles(response.data.articles)
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
