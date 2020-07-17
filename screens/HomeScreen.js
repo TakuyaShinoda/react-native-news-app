@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
   },
 })
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [articles, setArticles] = useState([])
   const renderItem = ({ item }) => (
     <ListItem
       imageUrl={item.urlToImage}
       title={item.title}
       author={item.author}
+      onPress={() => navigation.navigate('Article')}
     />
   )
   useEffect(() => {
