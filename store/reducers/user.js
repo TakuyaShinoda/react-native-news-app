@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
     case 'DELETE_CLIP':
       return {
         ...state,
-        clips: ...state.clips.filter(clip => clip.url !== action.clip.url),
+        clips: state.clips.filter(clip => clip.url !== action.clip.url),
       }
     default:
       return state
