@@ -1,4 +1,4 @@
-import React, { StyleSheet, SafeAreaView, Text } from 'react'
+import React, { StyleSheet, SafeAreaView, Text } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
